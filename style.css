@@ -167,7 +167,7 @@ header {
     transition: background-color 0.3s, transform 0.2s;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     display: inline-block;
-    margin-top: 15rem;
+    margin-top: 10rem;
 }
 
 .btn:hover {
