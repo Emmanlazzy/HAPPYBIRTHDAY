@@ -17,7 +17,7 @@
     <audio id="background-music" src="Alec Koff - Birthday Song.mp3" loop autoplay muted></audio>
 
     <!-- Surprise Sound -->
-    <audio id="surprise-sound" src="C:\xampp\htdocs\beb\Confetti Party Popper  Free Sound Effect.mp3" preload="auto"></audio>
+    <audio id="surprise-sound" src="Confetti Party Popper Free Sound Effect.mp3" preload="auto"></audio>
 
     <header>
         🎉 Happy Birthday, Beb ! 🎉
@@ -81,17 +81,12 @@
 
             // Simulate the loading process (1.5 seconds)
             setTimeout(() => {
-                console.log("Loading complete. Hiding the loading spinner and showing the surprise...");
                 // Hide the loading spinner and reveal the surprise message and icon
                 loading.style.display = 'none';  // Hide loading spinner
                 messageElement.style.display = 'block';  // Show message
                 surpriseIcon.style.display = 'block';   // Show the icon
             }, 1500);  // 1.5 seconds delay before showing the surprise
         }
-
-        // Ensure that button triggers the revealMessage function correctly
-        const surpriseBtn = document.querySelector('.surprise-btn');
-        surpriseBtn.addEventListener('click', revealMessage);
 
         // Custom Kiss Cursor Logic
         let kissCursor = document.createElement('div');
@@ -126,12 +121,9 @@
             document.body.appendChild(heart);
 
             // Animate the heart emoji
-            heart.animate([{
-                    transform: 'scale(1)'
-                },
-                {
-                    transform: 'scale(1.5)', opacity: 0
-                }
+            heart.animate([
+                { transform: 'scale(1)' },
+                { transform: 'scale(1.5)', opacity: 0 }
             ], {
                 duration: 500,
                 easing: 'ease-in-out',
@@ -175,7 +167,5 @@
             }
         });
     </script>
-
-    <script src="cursor.js"></script> <!-- Include the cursor.js -->
 </body>
 </html>
