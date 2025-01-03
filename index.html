@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti"></script> <!-- Confetti library -->
+</head>
+<body>
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading"></div>
+
+    <!-- Background Music -->
+    <audio id="background-music" src="Alec Koff - Birthday Song.mp3" loop autoplay muted></audio>
+
+    <!-- Surprise Sound -->
+    <audio id="surprise-sound" src="C:\xampp\htdocs\beb\Confetti Party Popper  Free Sound Effect.mp3" preload="auto"></audio>
+
+    <header>
+        🎉 Happy Birthday, Beb ! 🎉
+    </header>
+
+    <div class="container">
+        <p class="birthday-message">
+            Wishing you the happiest birthday filled with love, joy, and endless smiles. You make my 2024 so special :)) <br>
+            <br>  <strong>Now click mo yung pink na nag ba-bounce</strong>
+        </p>
+
+        <!-- Profile Picture Section -->
+        <div class="profile-picture">
+            <img src="her.jpg" alt="Her Picture" class="profile-img">
+        </div>
+
+        <!-- Surprise Button with Heart Icon -->
+        <button class="surprise-btn kiss-target" onclick="revealMessage()">
+            <img src="n4iz2zypyir81.gif" alt="Surprise Icon" class="btn-icon">
+        </button>
+
+        <p id="message" style="display: none;">
+            You are the most beautiful flower in my garden of life! 🌸<br>
+            You light up every room you walk into, and your kindness inspires me every day. 💖<br>
+            HAHAHA korni no , joke lang yung message ko talaga nasa " EXIT " uto-uto ka kasi HAHAHAA love you beb
+        </p>
+
+        <p id="surprise-icon" style="display: none;">
+            <img src="heart.png" alt="Surprise Icon" width="50" height="50">
+        </p>
+
+        <nav>
+            <a href="messages.html" class="btn">EXIT</a>
+        </nav>
+    </div>
+
+    <footer class="footer">
+        FROM : BLAKE 😎
+    </footer>
+
+    <script>
+        // Function to reveal the surprise message
+        function revealMessage() {
+            const messageElement = document.getElementById('message');
+            const surpriseIcon = document.getElementById('surprise-icon');
+            const loading = document.getElementById('loading');
+            const btn = document.querySelector('.surprise-btn');
+            const btnIcon = btn.querySelector('.btn-icon');
+            btnIcon.style.display = 'none';
+
+            // Show heart emoji and play confetti animation
+            btn.innerHTML = '❤️';
+            loading.style.display = 'block';  // Show loading animation
+            
+            // Play surprise sound
+            const surpriseSound = document.getElementById('surprise-sound');
+            surpriseSound.play();
+
+            // Trigger confetti effect
+            confetti();  // Ensure the confetti library is loaded correctly
+
+            // Simulate the loading process (1.5 seconds)
+            setTimeout(() => {
+                console.log("Loading complete. Hiding the loading spinner and showing the surprise...");
+                // Hide the loading spinner and reveal the surprise message and icon
+                loading.style.display = 'none';  // Hide loading spinner
+                messageElement.style.display = 'block';  // Show message
+                surpriseIcon.style.display = 'block';   // Show the icon
+            }, 1500);  // 1.5 seconds delay before showing the surprise
+        }
+
+        // Ensure that button triggers the revealMessage function correctly
+        const surpriseBtn = document.querySelector('.surprise-btn');
+        surpriseBtn.addEventListener('click', revealMessage);
+
+        // Custom Kiss Cursor Logic
+        let kissCursor = document.createElement('div');
+        kissCursor.classList.add('custom-kiss-cursor');
+        document.body.appendChild(kissCursor);
+
+        // Update cursor position based on mouse movement
+        document.addEventListener('mousemove', (e) => {
+            kissCursor.style.left = `${e.pageX}px`;
+            kissCursor.style.top = `${e.pageY}px`;
+        });
+
+        // When hovering over certain elements, add the "kiss-cursor-active" class
+        document.querySelectorAll('.kiss-target').forEach(target => {
+            target.addEventListener('mouseenter', () => {
+                kissCursor.classList.add('kiss-cursor-active');  // Activate kiss cursor
+            });
+            target.addEventListener('mouseleave', () => {
+                kissCursor.classList.remove('kiss-cursor-active');  // Deactivate kiss cursor
+            });
+        });
+
+        // Example of trigger on click event (like blowing a kiss animation)
+        document.querySelector('.kiss-target').addEventListener('click', () => {
+            // Trigger animation or effect here (e.g., heart animation or sound)
+            const heart = document.createElement('span');
+            heart.innerHTML = '💋';  // Create a kiss heart emoji effect
+            heart.style.position = 'absolute';
+            heart.style.left = `${kissCursor.style.left}`;
+            heart.style.top = `${kissCursor.style.top}`;
+            heart.style.fontSize = '2rem';
+            document.body.appendChild(heart);
+
+            // Animate the heart emoji
+            heart.animate([{
+                    transform: 'scale(1)'
+                },
+                {
+                    transform: 'scale(1.5)', opacity: 0
+                }
+            ], {
+                duration: 500,
+                easing: 'ease-in-out',
+                fill: 'forwards'
+            });
+
+            // Remove the heart after animation ends
+            setTimeout(() => {
+                heart.remove();
+            }, 500);
+        });
+
+        // Unmute audio after user interaction
+        const audio = document.getElementById('background-music');
+        
+        // Ensure audio is unmuted when user interacts with page (click anywhere)
+        document.body.addEventListener('click', () => {
+            audio.muted = false; // Unmute the audio when user clicks anywhere on the page
+            audio.volume = 1.0; // Set volume to 100%
+            audio.play().then(() => {
+                console.log("Background music is playing.");
+                // Save the playback state in localStorage
+                localStorage.setItem('audioState', JSON.stringify({
+                    muted: audio.muted,
+                    volume: audio.volume
+                }));
+            }).catch((error) => {
+                console.log("Error playing background music:", error);
+            });
+        });
+
+        // Check for the saved audio state when the page loads
+        window.addEventListener('load', () => {
+            const savedAudioState = JSON.parse(localStorage.getItem('audioState'));
+            if (savedAudioState) {
+                audio.muted = savedAudioState.muted;
+                audio.volume = savedAudioState.volume;
+                audio.play().catch((error) => {
+                    console.log("Error playing background music:", error);
+                });
+            }
+        });
+    </script>
+
+    <script src="cursor.js"></script> <!-- Include the cursor.js -->
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Messages</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="special-message.css">
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="background-music" src="Alec Koff - Birthday Song.mp3" loop autoplay muted></audio>
+
+    <!-- Custom Cursor -->
+    <div class="custom-kiss-cursor"></div>
+
+    <!-- Header -->
+    <header>
+        Special Messages for You
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Left Section for Images -->
+        <div class="image-section left">
+            <div class="image-wrapper">
+                <img src="HER6.jpg" alt="Her Image">
+            </div>
+            <div class="image-wrapper">
+                <img src="HER3.jpg" alt="Another Image">
+            </div>
+            <div class="image-wrapper">
+                <img src="HER2.jpg" alt="Another Image">
+            </div>
+        </div>
+
+        <!-- Center Content -->
+        <div class="container">
+            <div class="content-wrapper">
+                <p> I just want you to know how much I appreciate having you in my life.    
+                    Talking to you, hearing about your day, and just being around you-even virtually-makes everything better. 
+                    You're kind, funny, and honestly one of the most amazing people I've met. I love how you always share bits of your life with me, and I feel lucky that you trust me with that.
+                    Kahit na kinukupal mo ako palagi at inaaway mo, I still appreciate you so much. Whether we're chatting or laughing at TikToks, those moments with you really make my day.
+                    
+                    Wishing you a birthday as sweet and wonderful as you are. You deserve all the happiness in the world. Enjoy your special day babyy .
+                </p> 
+                <p>Thank you for being uniquely you. 💝</p>
+            </div>
+        </div>
+
+        <!-- Right Section for Images -->
+        <div class="image-section right">
+            <div class="image-wrapper">
+                <img src="HER1.jpg" alt="Her Image">
+            </div>
+            <div class="image-wrapper">
+                <img src="HER4.jpg" alt="Another Image">
+            </div>
+            <div class="image-wrapper">
+                <img src="HER5.jpg" alt="Another Image">
+            </div>
+        </div>
+    </div>
+
+    <!-- Light Strips -->
+    <div class="light-strip left-strip"></div>
+    <div class="light-strip right-strip"></div>
+
+    <!-- Button (Back to Main Page) -->
+    <div class="btn-container">
+        <a href="index.html" class="btn">Back</a>
+    </div>
+
+    <!-- Modal for Full Image -->
+    <div id="image-modal" class="modal">
+        <span class="close-btn" id="close-modal">&times;</span>
+        <img class="modal-content" id="modal-img" alt="Full-size image">
+        <div id="caption"></div>
+    </div>
+
+    <script>
+        let cursor = document.querySelector('.custom-kiss-cursor');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.pageX}px`;
+            cursor.style.top = `${e.pageY}px`;
+        });
+
+        document.querySelectorAll('.surprise-btn, .btn').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                cursor.classList.add('clicking');
+            });
+            button.addEventListener('mouseup', () => {
+                cursor.classList.remove('clicking');
+            });
+        });
+
+        // Unmute audio on page load and continue playing
+        window.addEventListener('load', () => {
+            const audio = document.getElementById('background-music');
+            audio.muted = false;  // Unmute audio
+            audio.play();  // Ensure it keeps playing
+        });
+
+        // Modal logic for full image
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const captionText = document.getElementById('caption');
+        const closeModal = document.getElementById('close-modal');
+
+        // Get all image elements inside the .image-wrapper
+        const images = document.querySelectorAll('.image-wrapper img');
+
+        // Add click event to all images
+        images.forEach(img => {
+            img.addEventListener('click', (e) => {
+                modal.style.display = 'flex';  // Show the modal
+                modalImg.src = e.target.src;  // Set the image source to the clicked image's source
+                captionText.textContent = e.target.alt;  // Set caption to the image's alt text
+            });
+        });
+
+        // Close the modal when the user clicks the close button
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';  // Hide the modal
+        });
+
+        // Close the modal when clicking anywhere outside the image
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';  // Hide the modal if the user clicks outside the image
+            }
+        });
+    </script>
+
+    <script src="special-message.js"></script>
+</body>
+</html>
